@@ -46,21 +46,21 @@ return array(
 	|
 	| Each connection can have its own API key, from name and email address,
 	| reply-to name and email address. This way you don't have to provide
-	| these information each time you perform an operation. Only apiKey and
-	| fromEmail is required, you can leave the rest blank.
+	| these information each time you perform an operation. Only apikey and
+	| fromemail is required, the rest are optional.
 	|
 	| To get your API key, first login to SenderSuite (http://sendersuite.com)
 	| and then go to "API Keys" screen.
 	|
 	| In order to send email from SenderSuite, you need to create a sender
-	| on your SenderSuite account and use it as fromEmail.
+	| on your SenderSuite account and use it as fromemail.
 	|
 	*/
 	'connections' => array(
 		'production' => array(
-			'apikey'		=> 's2-ickI-oLg0-zvBB-1rn0-cVpP',
+			'apikey'		=> '',
 			'fromname'		=> '',
-			'fromemail'		=> 'mert.hurturk@gmail.com',
+			'fromemail'		=> '',
 			'replytoname'	=> '',
 			'replytoemail'	=> '',
 		),
