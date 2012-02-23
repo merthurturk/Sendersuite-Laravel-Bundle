@@ -1,27 +1,22 @@
 # SenderSuite Bundle, by Mert Hurturk
 
-SenderSuite bundle lets you to send emails from your Laravel application through your SenderSuite account easily.
+SenderSuite bundle lets you to send transactional emails from your Laravel application through your SenderSuite account easily.
 
 In order to use this bundle, you need to have a SenderSuite account, which you can create one here: http://sendersuite.com/#signup
 
 To get a SenderSuite connection instance:
 
-	$ssConnection = IoC::resolve('sendersuite.default');
+	$ssConnection = IoC::resolve('sendersuite');
 
-You can create as many connection configurations as you like and register your own SenderSuite connections with those configurations in the IoC container. Here is the default configuration registration:
+By default SenderSuite bundle uses `production` connection configuration setup on bundle configuration. You can create as many connection configurations as you like and use any of your SenderSuite connection configurations by passing the configuration to `sendEmail` method. Here is an example:
 
-	Laravel\IoC::singleton('sendersuite.default', function()
-	{
-		$ssConnection = new \Sendersuite\Connection;
-		$ssConnection->setAPIkey(Config::item('sendersuite:connections.default.apiKey'));
-		$ssConnection->setFrom(Config::item('sendersuite:connections.default.fromName'),
-			Config::item('sendersuite:connections.default.fromEmail'));
-		$ssConnection->setReplyTo(Config::item('sendersuite:connections.default.replyToName'),
-			Config::item('sendersuite:connections.default.replyToEmail'));
-		$ssConnection->debugMode(Config::item('sendersuite:debugMode'));
+	$ssConnection = IoC::resolve('sendersuite');
+	$connConfigName = 'testconnection';
+	$ssConnection->sendEmail('mert.hurturk@gmail.com', 'Subject', 'HTML Body', 'Text Body', $connConfigName);
 
-		return $ssConnection;
-	});
+## Error Handling
+
+`sendEmail` method returns true if email is successfully sent, otherwise false. However, when there is a connection issue or a configuration issue, it throws exceptions.
 
 * Bugs: https://github.com/merthurturk/Sendersuite-Laravel-Bundle/issues
 
