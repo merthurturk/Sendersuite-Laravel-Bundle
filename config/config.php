@@ -6,25 +6,15 @@ return array(
 	| Debug mode
 	|--------------------------------------------------------------------------
 	|
-	| When debug mode is enabled (debugmode => true), no emails sent but
-	| sendersuite.email event is fired with the following parameters:
-	|
-	| * Connection configuration name
-	| * Connection configuration array
-	| * Recipient email address
-	| * Email subject
-	| * Email HTML body
-	| * Email text body
-	|
-	| By listening to this event, you can make tests on your application without
-	| spending your SenderSuite credits.
+	| When debug mode is enabled, sendersuite.email.debug event is fired each
+	| time an email is sent with Sendersuite bundle.
 	|
 	*/
 	'debugmode' => false,
 
 	/*
 	|--------------------------------------------------------------------------
-	| Default Sendersuite Connection
+	| Default connection
 	|--------------------------------------------------------------------------
 	|
 	| The name of your default sendersuite connection. This connection will used
@@ -33,11 +23,11 @@ return array(
 	| listed in the array of connections below.
 	|
 	*/
-	'default' => 'production',
+	'defaultconnection' => 'production',
 
 	/*
 	|--------------------------------------------------------------------------
-	| Sendersuite Connections
+	| Connections
 	|--------------------------------------------------------------------------
 	|
 	| All of the sendersuite connections used by your application. Many of your
@@ -63,7 +53,7 @@ return array(
 			'fromemail'		=> '',
 			'replytoname'	=> '',
 			'replytoemail'	=> '',
-		),
+		)
 	),
 
 );

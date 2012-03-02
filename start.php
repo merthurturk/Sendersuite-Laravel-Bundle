@@ -6,7 +6,15 @@ Autoloader::namespaces(array(
 // Register sendersuite in the IoC container
 Laravel\IoC::singleton('sendersuite', function()
 {
-	$ssConnection = new \Sendersuite\Connection;
-	$ssConnection->debugMode(Config::get('sendersuite::config.debugmode'));
-	return $ssConnection;
+	$confProvider = new \Sendersuite\ConfigurationProvider();
+
+	if (\Laravel\Config::get('sendersuite::config.debugmode')) {
+		$apiConnection = new \Sendersuite\EventConnection();
+	} else {
+		$apiConnection = new \Sendersuite\HttpConnection();
+	}
+
+	$ssApi = new \Sendersuite\Api($apiConnection, $confProvider);
+
+	return $ssApi;
 });

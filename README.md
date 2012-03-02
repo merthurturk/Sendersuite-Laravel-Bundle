@@ -6,17 +6,22 @@ In order to use this bundle, you need to have a SenderSuite account, which you c
 
 To get a SenderSuite connection instance:
 
-	$ssConnection = IoC::resolve('sendersuite');
+	$ssApi = IoC::resolve('sendersuite');
 
 By default SenderSuite bundle uses `production` connection configuration setup on bundle configuration. You can create as many connection configurations as you like and use any of your SenderSuite connection configurations by passing the configuration to `sendEmail` method. Here is an example:
 
-	$ssConnection = IoC::resolve('sendersuite');
-	$connConfigName = 'testconnection';
-	$ssConnection->sendEmail('mert.hurturk@gmail.com', 'Subject', 'HTML Body', 'Text Body', $connConfigName);
+	$ssApi = IoC::resolve('sendersuite');
+	$ssApi->sendEmail('mert.hurturk@gmail.com', 'Subject', 'HTML Body', 'Text Body');
 
 ## Error Handling
 
-`sendEmail` method returns true if email is successfully sent, otherwise false. However, when there is a connection issue or a configuration issue, it throws exceptions.
+`sendEmail` method returns true if email is successfully sent, otherwise returns false and fires `sendersuite.email.error` with three parameters:
+
+* An array containing the parameters passed to `sendEmail` method
+* Configuration array
+* Exception object
+
+ However, if you pass invalid configuration key to sendEmail method, it throws an exception.
 
 * Bugs: https://github.com/merthurturk/Sendersuite-Laravel-Bundle/issues
 
